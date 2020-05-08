@@ -9,16 +9,13 @@
 <body>
     <h1 id="title">QWACK</h1>
     <form id="new-drawing">
-        <div id="form-wrapper">
-            <div class="form-item">
-                <label for="height" class="primary">height</label>
-                <input type="number" id="height" max="64" min="1" value="8"/>
-            </div>
-  
-            <div class="form-item">
-                <label for="width" class="primary">width</label>
-                <input type="number" id="width" max="64" min="1" value="8"/>
-            </div>
+        <div id="size-select">
+            <label for="size" class="primary">size:</label>
+            <select id="size">
+                <option value="8">8</option>
+                <option value="16">16</option>
+                <option value="32">32</option>
+            </select>
         </div>
         <input type="submit" value="create grid"/>
     </form>

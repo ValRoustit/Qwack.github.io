@@ -1,7 +1,17 @@
 #my-canvas {
     position: absolute;
-    width: 256px;
-    height: 256px;
+    width: 513px;
+    height: 513px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#coor {
+    position: absolute;
+    width: 513px;
+    height: 513px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
@@ -11,8 +21,9 @@
 #grid {
     position: absolute;
     color: rgb(0, 0, 0);
-    width: 256px;
-    height: 256px;
+    border: 10px black;
+    width: 513px;
+    height: 513px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;

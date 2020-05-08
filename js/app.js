@@ -13,22 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const handleNewDrawing = function (event) {
     event.preventDefault();
-    const height = event.target.height.value;
-    const width = event.target.width.value;
-    const heightGrid = height * 32;
-    const widthGrid = width * 32;
-    debugger
+    const size = event.target.size.value;
+    const gridSize = 513;
   
     const drawing = document.querySelector('#drawing');
     while (drawing.firstChild) {drawing.removeChild(drawing.lastChild)};
 
-    const canvas = createCanvas("my-canvas", height, width);
+    const canvas = createCanvas("my-canvas", size);
     drawing.appendChild(canvas);
 
-    const grid = createCanvas("grid", heightGrid, widthGrid);
+    const grid = createCanvas("grid", gridSize);
     drawing.appendChild(grid);
 
-    drawGrid("grid");
+    drawGrid(grid, size);
 }
 
 const handleNewColor = function(event) {
@@ -39,25 +36,36 @@ const handleDeletePalette = function(event) {
 
 }
 
-const createCanvas = function(id, height, width) {
+const createCanvas = function(id, size) {
     const canvas = document.createElement("canvas");
     canvas.id = id;
-    canvas.height = height;
-    canvas.width = width;
+    canvas.height = size;
+    canvas.width = size;
     return canvas
 }
 
-const drawGrid = function(id) {
-    const grid = document.getElementById(id);
-    const ctx = grid.getContext('2d')
+const drawGrid = function(canvas, size) {
+    // debugger
+    const ctx = canvas.getContext('2d')
+    const pixelLength = (canvas.height-1)/size
+    ctx.lineWidth = 0.5;
 
-    for(let i = 0; i <= grid.height; i += i * 32) {
-        ctx.moveTo(0, i);
-        ctx.lineTo(grid.width, i);
+    ctx.translate(0.5, 0.5);
+    for (var i=0; i<=canvas.height; i+=pixelLength) {
+
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvas.height);
         ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(0, i)
+        ctx.lineTo(canvas.height, i)
+        ctx.stroke();
+        ctx.closePath();
     }
 }
-
 
 // const grid = document.getElementById("grid");
 // const ctxGrid = grid.getContext('2d');
