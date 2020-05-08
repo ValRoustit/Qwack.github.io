@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QWACK</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <h1 id="title">QWACK</h1>
+    <form id="new-drawing">
+        <div id="form-wrapper">
+            <div class="form-item">
+                <label for="height" class="primary">height</label>
+                <input type="number" id="height" max="64" min="1" value="8"/>
+            </div>
+  
+            <div class="form-item">
+                <label for="width" class="primary">width</label>
+                <input type="number" id="width" max="64" min="1" value="8"/>
+            </div>
+        </div>
+        <input type="submit" value="save"/>
+    </form>
+
+    <form id="colors-palete">
+        <label for="color" class="primary">color</label>
+        <input type="color" id="color">
+
+        <ul id="palette">
+        </ul>
+        <input type="submit" value="add to palette"/>
+    </form>
+
+    <div id="drawing"></div>
+</body>
+</html>
