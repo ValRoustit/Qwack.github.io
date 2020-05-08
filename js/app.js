@@ -1,23 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // debugger
+    const newDrawingform = document.querySelector("#new-drawing");
+    newDrawingform.addEventListener("submit", handleNewDrawing);
 
-    const newDrawingform = document.querySelector('#new-drawing');
-    newDrawingform.addEventListener('submit', handleNewDrawing);
-
-    const newColorform = document.querySelector('#colors-palette');
-    newColorform.addEventListener('submit', handleNewColor);
+    const newColorform = document.querySelector("#colors-palette");
+    newColorform.addEventListener("submit", handleNewColor);
   
-    const deletePalette = document.querySelector('#delete-palette');
-    deletePalette.addEventListener('click', handleDeletePalette);
+    const deletePalette = document.querySelector("#delete-palette");
+    deletePalette.addEventListener("click", handleDeletePalette);
 })
+
+const handleNewColor = function() {
+    event.preventDefault();
+    // debugger
+    const color = document.querySelector("#color");
+    const palette = document.querySelector("#palette");
+
+    const newColorItem = createColorItem(color);
+    palette.appendChild(newColorItem);
+}
+
+const createColorItem = function(color) {
+    const newItem = document.createElement("input");
+    newItem.type = "radio"; 
+    newItem.value = color.value;
+    newItem.id = "color-in-palette";
+    return newItem;
+}
+
+const handleDeletePalette = function(event) {
+    const palette = document.querySelector("#palette");
+    while (palette.firstChild) {
+        palette.removeChild(palette.lastChild)
+    };
+}
 
 const handleNewDrawing = function (event) {
     event.preventDefault();
     const size = event.target.size.value;
     const gridSize = 513;
   
-    const drawing = document.querySelector('#drawing');
-    while (drawing.firstChild) {drawing.removeChild(drawing.lastChild)};
+    const drawing = document.querySelector("#drawing");
+    while (drawing.firstChild) {
+        drawing.removeChild(drawing.lastChild)
+    };
 
     const canvas = createCanvas("my-canvas", size);
     drawing.appendChild(canvas);
@@ -26,14 +51,6 @@ const handleNewDrawing = function (event) {
     drawing.appendChild(grid);
 
     drawGrid(grid, size);
-}
-
-const handleNewColor = function(event) {
-
-}
-
-const handleDeletePalette = function(event) {
-
 }
 
 const createCanvas = function(id, size) {
@@ -45,8 +62,7 @@ const createCanvas = function(id, size) {
 }
 
 const drawGrid = function(canvas, size) {
-    // debugger
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext("2d")
     const pixelLength = (canvas.height-1)/size
     ctx.lineWidth = 0.5;
 
@@ -66,9 +82,3 @@ const drawGrid = function(canvas, size) {
         ctx.closePath();
     }
 }
-
-// const grid = document.getElementById("grid");
-// const ctxGrid = grid.getContext('2d');
-
-// ctxGrid.fillStyle = 'black';
-// ctxGrid.fillRect(0, 0, grid.width, grid.height);
