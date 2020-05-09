@@ -7,7 +7,19 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const deletePalette = document.querySelector("#delete-palette");
     deletePalette.addEventListener("click", handleDeletePalette);
+
+    const eraser = document.querySelector("#eraser");
+    eraser.addEventListener("click", handleEraser);
 })
+
+let colorSelected = "";
+let eraser = false;
+
+//--------------------------------------------
+
+const handleEraser = function() {
+    eraser = true;
+}
 
 const handleDrawPixel = function(event) {
     const x = event.offsetX;
@@ -22,7 +34,6 @@ const handlePreRender = function(event) {
 }
 
 const drawPixel = function(x, y) {
-    // debugger
     const canvas = document.querySelector("#my-canvas");
     const ctx = canvas.getContext("2d")
     const size = canvas.width;
@@ -31,8 +42,13 @@ const drawPixel = function(x, y) {
     const canvasX = Math.floor(x/boxSide);
     const canvasY = Math.floor(y/boxSide);
 
-    ctx.fillStyle = 'green';
-    ctx.fillRect(canvasX, canvasY, 1, 1);
+    if(eraser) {
+        ctx.clearRect(canvasX, canvasY, 1, 1)
+    } else {
+        ctx.fillStyle = colorSelected;
+        ctx.fillRect(canvasX, canvasY, 1, 1);
+    }
+
 }
 
 const handleNewColor = function(event) {
@@ -45,11 +61,19 @@ const handleNewColor = function(event) {
 }
 
 const createColorItem = function(color) {
-    const newItem = document.createElement("input");
-    newItem.type = "radio"; 
-    newItem.value = color.value;
-    newItem.name = "color-in-palette";
-    return newItem;
+    const newColor = document.createElement("input");
+    newColor.type = "radio"; 
+    newColor.value = color.value;
+    newColor.name = "color-in-palette";
+    newColor.checked = "true";
+
+    newColor.addEventListener("click", selectColor);
+    return newColor;
+}
+
+const selectColor = function(event) {
+    eraser = false;
+    colorSelected = event.target.value;
 }
 
 const handleDeletePalette = function() {
