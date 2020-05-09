@@ -10,12 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const eraser = document.querySelector("#eraser");
     eraser.addEventListener("click", handleEraser);
+
+    const download = document.querySelector("#download");
+    download.addEventListener("click", handleDownload)
 })
 
 let colorSelected = "";
 let eraser = false;
 
 //--------------------------------------------
+
+const handleDownload = function() {
+    const canvas = document.querySelector("#my-canvas");
+    const qwack = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    window.location.href=qwack;
+}
 
 const handleEraser = function() {
     eraser = true;
