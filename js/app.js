@@ -9,9 +9,34 @@ document.addEventListener("DOMContentLoaded", () => {
     deletePalette.addEventListener("click", handleDeletePalette);
 })
 
-const handleNewColor = function() {
-    event.preventDefault();
+const handleDrawPixel = function(event) {
+    const x = event.offsetX;
+    const y = event.offsetY;
+
+    drawPixel(x, y);
+}
+
+const handlePreRender = function(event) {
+    const x = event.offsetX;
+    const y = event.offsetY;
+}
+
+const drawPixel = function(x, y) {
     // debugger
+    const canvas = document.querySelector("#my-canvas");
+    const ctx = canvas.getContext("2d")
+    const size = canvas.width;
+    const boxSide = 512/size;
+
+    const canvasX = Math.floor(x/boxSide);
+    const canvasY = Math.floor(y/boxSide);
+
+    ctx.fillStyle = 'green';
+    ctx.fillRect(canvasX, canvasY, 1, 1);
+}
+
+const handleNewColor = function(event) {
+    event.preventDefault();
     const color = document.querySelector("#color");
     const palette = document.querySelector("#palette");
 
@@ -23,11 +48,11 @@ const createColorItem = function(color) {
     const newItem = document.createElement("input");
     newItem.type = "radio"; 
     newItem.value = color.value;
-    newItem.id = "color-in-palette";
+    newItem.name = "color-in-palette";
     return newItem;
 }
 
-const handleDeletePalette = function(event) {
+const handleDeletePalette = function() {
     const palette = document.querySelector("#palette");
     while (palette.firstChild) {
         palette.removeChild(palette.lastChild)
@@ -51,6 +76,9 @@ const handleNewDrawing = function (event) {
     drawing.appendChild(grid);
 
     drawGrid(grid, size);
+
+    grid.addEventListener("mousedown", handleDrawPixel);
+    grid.addEventListener("mouseover", handlePreRender);
 }
 
 const createCanvas = function(id, size) {
@@ -68,7 +96,6 @@ const drawGrid = function(canvas, size) {
 
     ctx.translate(0.5, 0.5);
     for (var i=0; i<=canvas.height; i+=pixelLength) {
-
         ctx.beginPath();
         ctx.moveTo(i, 0);
         ctx.lineTo(i, canvas.height);
