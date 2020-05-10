@@ -27,11 +27,32 @@ let colorId = 0;
 
 //--------------------------------------------
 
+const downloadFile = function(canvas) {
+    // Create an invisible A element
+    const a = document.createElement("a");
+    a.style.display = "none";
+    document.body.appendChild(a);
+  
+    // Set the HREF 
+    a.href = canvas.toDataURL("image/png");;
+  
+    // Use download attribute to set desired file name
+    a.setAttribute("download", "Qwack");
+  
+    // Trigger the download by simulating click
+    a.click();
+  
+    // Cleanup
+    window.URL.revokeObjectURL(a.href);
+    document.body.removeChild(a);
+}
+
 const handleDownload = function() {
     const canvas = document.querySelector("#my-canvas");
-    const qwack = canvas.toDataURL("image/png");
-    window.location.href=qwack;
+    downloadFile(canvas)
 }
+
+//-----------------------------------------------------------------
 
 const handleEraser = function() {
     eraser = true;
@@ -75,7 +96,7 @@ const handleNewColor = function(event) {
     const newColorItem = createColorItem(color);
 
     palette.appendChild(newColorItem);
-    handleSelectColor
+    handleSelectColor();
 }
 
 const createLabel = function(color) {

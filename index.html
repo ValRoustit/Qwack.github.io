@@ -22,7 +22,7 @@
 
     <form id="choose-color">
         <label for="color" class="primary">color</label>
-        <input type="color" id="color">
+        <input type="color" id="color" value="#E8BC00">
 
         <input type="submit" value="add to palette"/>
     </form>
@@ -30,7 +30,7 @@
     <h3>color palette:</h3>
     <div id="palette">
         <div id="fixed-palette">
-            <input type="radio" value="black" name="color-in-palette" style="background-color: black;">
+            <input type="radio" value="black" name="color-in-palette" style="background-color: black;" checked>
             <input type="radio" value="white" name="color-in-palette" style="background-color: white;">
             <input type="radio" value="red" name="color-in-palette" style="background-color: red;">
             <input type="radio" value="blue" name="color-in-palette" style="background-color: blue;">
@@ -41,7 +41,7 @@
     
     <button id="eraser">eraser</button>
 
-    <button id="delete-palette">delete palette</button>
+    <button id="delete-palette">reset palette</button>
     <button id="download">download qwack</button>
     <div id="drawing">
         <canvas id="my-canvas" height="8" width="8"></canvas>
