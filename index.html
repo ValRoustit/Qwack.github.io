@@ -7,45 +7,53 @@
     <script src="js/app.js"></script>
 </head>
 <body>
-    <h1 id="title">QWACK !!</h1>
-    <form id="new-drawing">
-        <div id="size-select">
-            <label for="size" class="primary">size:</label>
-            <select id="size">
-                <option value="8">8</option>
-                <option value="16">16</option>
-                <option value="32">32</option>
-            </select>
-        </div>
-        <input type="submit" value="new qwack"/>
-    </form>
-
-    <form id="choose-color">
-        <label for="color" class="primary">color</label>
-        <input type="color" id="color" value="#E8BC00">
-
-        <input type="submit" value="add to palette"/>
-    </form>
-
-    <h3>color palette:</h3>
-    <div id="palette">
-        <div id="fixed-palette">
-            <input type="radio" value="black" name="color-in-palette" style="background-color: black;" checked>
-            <input type="radio" value="white" name="color-in-palette" style="background-color: white;">
-            <input type="radio" value="red" name="color-in-palette" style="background-color: red;">
-            <input type="radio" value="blue" name="color-in-palette" style="background-color: blue;">
-            <input type="radio" value="green" name="color-in-palette" style="background-color: green;">
-        </div>
-        <div id="new-palette"></div>
+    <div class="header">
+        <h1 class="title"><img class="logo" src="images/Qwack.png" alt="logo" />QWACK !!</h1>
     </div>
     
-    <button id="eraser">eraser</button>
+    <div class="main">
+        <form id="new-drawing">
+            <div id="size-select">
+                <label for="size" class="primary">size:</label>
+                <select id="size">
+                    <option value="8">8</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                </select>
+            </div>
+            <input type="submit" value="new qwack"/>
+        </form>
 
-    <button id="delete-palette">reset palette</button>
-    <button id="download">download qwack</button>
-    <div id="drawing">
-        <canvas id="my-canvas" height="8" width="8"></canvas>
-        <canvas id="grid" height="513" width="513"></canvas>
+        <form id="choose-color">
+            <label for="color" class="primary">color</label>
+            <input type="color" id="color" value="#E8BC00">
+
+            <input type="submit" value="add to palette"/>
+        </form>
+
+        <h3>color palette:</h3>
+        <div id="palette" class="main">
+            <div id="fixed-palette">
+                <input type="radio" value="black" name="color-in-palette" style="background-color: black;" checked>
+                <input type="radio" value="white" name="color-in-palette" style="background-color: white;">
+                <input type="radio" value="red" name="color-in-palette" style="background-color: red;">
+                <input type="radio" value="blue" name="color-in-palette" style="background-color: blue;">
+                <input type="radio" value="green" name="color-in-palette" style="background-color: green;">
+            </div>
+            <div id="new-palette"></div>
+        </div>
+        
+        <div>
+            <button id="eraser">eraser</button>
+            <button id="delete-palette">reset palette</button>
+            <button id="download">download qwack: 512px</button>
+            <button id="download-real-size">download qwack: real size</button>
+        </div>
+
+        <div id="drawing" class="main">
+            <canvas id="my-canvas" height="8" width="8"></canvas>
+            <canvas id="grid" height="513" width="513"></canvas>
+        </div>
     </div>
 </body>
 </html>

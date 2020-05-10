@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const download = document.querySelector("#download");
     download.addEventListener("click", handleDownload)
 
+    const downloadRealSize = document.querySelector("#download-real-size");
+    downloadRealSize.addEventListener("click", handleDownloadRealSize)
+
     const selectColor = document.querySelector("#palette");
     selectColor.addEventListener("click", handleSelectColor);
 })
@@ -52,12 +55,16 @@ const handleDownload = function() {
     upscaleCanvas(canvas);
 }
 
+const handleDownloadRealSize = function() {
+    const canvas = document.querySelector("#my-canvas");
+    downloadFile(canvas);
+}
+
 const upscaleCanvas = function(canvas) {
     const c = document.createElement("canvas");
     c.style.display = "none";
     c.height = 512;
     c.width = 512;
-    c.setAttribute("class", "canvas-download");
 
     document.body.appendChild(c);
     const ctx = c.getContext("2d");
@@ -197,6 +204,7 @@ const drawGrid = function(canvas, size) {
     const ctx = canvas.getContext("2d")
     const pixelLength = (canvas.height-1)/size
     ctx.lineWidth = 1;
+    ctx.strokeStyle = "white";
 
     ctx.translate(0.5, 0.5);
     for (var i=0; i<=canvas.height; i+=pixelLength) {

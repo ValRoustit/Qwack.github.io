@@ -1,6 +1,28 @@
-#title {
+h1 {
+    margin: 0;
+    top: 0;
+}
+
+body {
+    margin: 0;
+}
+
+.main {
+    margin: 2%;
+}
+
+.logo {
+    padding-bottom: 12px;
+    padding-right: 10px;
+    justify-content: center;
+    height: 45px;
+}
+
+.title {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 45px;
     font-weight: bold;
+    height: 90px;
     background-color: rgb(127, 161, 255);
     color: white;
     display: flex;
@@ -34,7 +56,11 @@
 }
 
 #my-canvas, .canvas-download {
+    outline: solid;
+    outline-width: 5px;
+    outline-color: #91d8cb;
     position: relative;
+    margin: 10px;
     background-color: rgb(245, 245, 245);
     top: 0.5px;
     left: 0.5px;
@@ -44,16 +70,19 @@
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    box-sizing: border-box;
 }
 
 #grid {
     position: absolute;
+    margin: 10px;
     top: 0;
-    left: -0.5px;
+    left: 0;
     width: 513px;
     height: 513px;
     image-rendering: -moz-crisp-edges;
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    box-sizing: border-box;
 }
