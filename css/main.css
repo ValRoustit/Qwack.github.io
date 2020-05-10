@@ -29,14 +29,13 @@
 }
 
 #drawing {
-    background-color: rgb(42, 125, 199);
     position: relative;
-    width: 50%;
     margin: auto;
 }
 
-#my-canvas {
-    position: absolute;
+#my-canvas, .canvas-download {
+    position: relative;
+    background-color: rgb(245, 245, 245);
     top: 0.5px;
     left: 0.5px;
     width: 512px;
@@ -49,6 +48,8 @@
 
 #grid {
     position: absolute;
+    top: 0;
+    left: -0.5px;
     width: 513px;
     height: 513px;
     image-rendering: -moz-crisp-edges;

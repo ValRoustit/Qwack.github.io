@@ -34,7 +34,7 @@ const downloadFile = function(canvas) {
     document.body.appendChild(a);
   
     // Set the HREF 
-    a.href = canvas.toDataURL("image/png");;
+    a.href = canvas.toDataURL("image/png");
   
     // Use download attribute to set desired file name
     a.setAttribute("download", "Qwack");
@@ -49,7 +49,28 @@ const downloadFile = function(canvas) {
 
 const handleDownload = function() {
     const canvas = document.querySelector("#my-canvas");
-    downloadFile(canvas)
+    upscaleCanvas(canvas);
+}
+
+const upscaleCanvas = function(canvas) {
+    const c = document.createElement("canvas");
+    c.style.display = "none";
+    c.height = 512;
+    c.width = 512;
+    c.setAttribute("class", "canvas-download");
+
+    document.body.appendChild(c);
+    const ctx = c.getContext("2d");
+
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+
+    ctx.drawImage(canvas, 0, 0, 512, 512);
+
+    downloadFile(c);
+
+    document.body.removeChild(c);
 }
 
 //-----------------------------------------------------------------
@@ -175,7 +196,7 @@ const createCanvas = function(id, size) {
 const drawGrid = function(canvas, size) {
     const ctx = canvas.getContext("2d")
     const pixelLength = (canvas.height-1)/size
-    ctx.lineWidth = 0.5;
+    ctx.lineWidth = 1;
 
     ctx.translate(0.5, 0.5);
     for (var i=0; i<=canvas.height; i+=pixelLength) {
