@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const newDrawingform = document.querySelector("#new-drawing");
-    newDrawingform.addEventListener("submit", handleNewDrawing);
+    const grid = document.querySelector("#grid");
+    handleGrid(grid);
 
-    const newColorform = document.querySelector("#colors-palette");
+    const newDrawing = document.querySelector("#new-drawing");
+    newDrawing.addEventListener("submit", handleNewDrawing);
+
+    const newColorform = document.querySelector("#choose-color");
     newColorform.addEventListener("submit", handleNewColor);
   
     const deletePalette = document.querySelector("#delete-palette");
@@ -13,16 +16,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const download = document.querySelector("#download");
     download.addEventListener("click", handleDownload)
+
+    const selectColor = document.querySelector("#palette");
+    selectColor.addEventListener("click", handleSelectColor);
 })
 
 let colorSelected = "";
 let eraser = false;
+let colorId = 0;
 
 //--------------------------------------------
 
 const handleDownload = function() {
     const canvas = document.querySelector("#my-canvas");
-    const qwack = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    const qwack = canvas.toDataURL("image/png");
     window.location.href=qwack;
 }
 
@@ -57,39 +64,61 @@ const drawPixel = function(x, y) {
         ctx.fillStyle = colorSelected;
         ctx.fillRect(canvasX, canvasY, 1, 1);
     }
-
 }
 
 const handleNewColor = function(event) {
     event.preventDefault();
+    colorId += 1;
     const color = document.querySelector("#color");
-    const palette = document.querySelector("#palette");
+    const palette = document.querySelector("#new-palette");
 
     const newColorItem = createColorItem(color);
+
     palette.appendChild(newColorItem);
+    handleSelectColor
+}
+
+const createLabel = function(color) {
+    const newLabel = document.createElement("label");
+    newLabel.setAttribute("for",color.id);
+    newLabel.setAttribute("class","primary");
+    newLabel.style = `background-color: ${color.value}`;
+    return newLabel;
 }
 
 const createColorItem = function(color) {
     const newColor = document.createElement("input");
     newColor.type = "radio"; 
+    newColor.class = "colors-in-palette"
     newColor.value = color.value;
     newColor.name = "color-in-palette";
     newColor.checked = "true";
+    newColor.style = `background-color: ${color.value}`;
 
-    newColor.addEventListener("click", selectColor);
     return newColor;
 }
 
-const selectColor = function(event) {
+const handleSelectColor = function() {
     eraser = false;
-    colorSelected = event.target.value;
+    const colors = Array.from(document.getElementsByName("color-in-palette"));
+    
+    colorSelected = colors.find(color => color.checked).value;
 }
 
 const handleDeletePalette = function() {
-    const palette = document.querySelector("#palette");
+    const palette = document.querySelector("#new-palette");
     while (palette.firstChild) {
         palette.removeChild(palette.lastChild)
     };
+}
+
+const handleGrid = function (grid) {
+    const size = 8;
+
+    drawGrid(grid, size);
+
+    grid.addEventListener("mousedown", handleDrawPixel);
+    grid.addEventListener("mouseover", handlePreRender);
 }
 
 const handleNewDrawing = function (event) {
