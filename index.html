@@ -32,15 +32,36 @@
         </form>
 
         <h3>color palette:</h3>
-        <div id="palette" class="main">
-            <div id="fixed-palette">
-                <input type="radio" value="black" name="color-in-palette" style="background-color: black;" checked>
-                <input type="radio" value="white" name="color-in-palette" style="background-color: white;">
-                <input type="radio" value="red" name="color-in-palette" style="background-color: red;">
-                <input type="radio" value="blue" name="color-in-palette" style="background-color: blue;">
-                <input type="radio" value="green" name="color-in-palette" style="background-color: green;">
+        <div id="palette" class="palette">
+            <div id="fixed-palette" class="fixed-palette">
+                <label class="container" style="--color: black">
+                    <input type="radio" value="black" name="color-in-palette" checked>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container" style="--color: white">
+                    <input type="radio" value="white" name="color-in-palette">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container" style="--color: red">
+                    <input type="radio" value="red" name="color-in-palette">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container" style="--color: blue">
+                    <input type="radio" value="blue" name="color-in-palette">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container" style="--color: green">
+                    <input type="radio" value="green" name="color-in-palette">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="container" style="--color: yellow">
+                    <input type="radio" value="yellow" name="color-in-palette">
+                    <span class="checkmark"></span>
+                </label>
             </div>
-            <div id="new-palette"></div>
+            <P>custom:</P>
+            <div id="new-palette" class="new-palette">
+            </div>
         </div>
         
         <div>

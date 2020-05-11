@@ -127,24 +127,24 @@ const handleNewColor = function(event) {
     handleSelectColor();
 }
 
-const createLabel = function(color) {
-    const newLabel = document.createElement("label");
-    newLabel.setAttribute("for",color.id);
-    newLabel.setAttribute("class","primary");
-    newLabel.style = `background-color: ${color.value}`;
-    return newLabel;
-}
-
 const createColorItem = function(color) {
+    const newLabel = document.createElement("label");
     const newColor = document.createElement("input");
+    const newSpan = document.createElement("span");
+
+    newLabel.setAttribute("class", "container");
+    newLabel.setAttribute("style", `--color: ${color.value}`);
+
     newColor.type = "radio"; 
-    newColor.class = "colors-in-palette"
     newColor.value = color.value;
     newColor.name = "color-in-palette";
     newColor.checked = "true";
-    newColor.style = `background-color: ${color.value}`;
 
-    return newColor;
+    newSpan.setAttribute("class", "checkmark");
+    newLabel.appendChild(newColor);
+    newLabel.appendChild(newSpan);
+
+    return newLabel;
 }
 
 const handleSelectColor = function() {
